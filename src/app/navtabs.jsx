@@ -5,22 +5,14 @@ import { useEffect } from "react";
 import ScrollToPlugin from "gsap/ScrollToPlugin";
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-let scrollTween = null
+let scrollTween = null;
 const handleClick = (n) => {
     scrollTween = gsap.to(window, {
-        scrollTo: { y: i * innerHeight, autoKill: false },
-        onStart: () => {
-            if (observer) {
-                observer.disable();
-                observer.enable();
-            }
-            console.log(scrollTween)
-        },
+        scrollTo: { y: n * innerHeight, autoKill: false },
         duration: 1,
         onComplete: () => (scrollTween = null),
         overwrite: true,
     });
-
 }
 
 const Nav = () => {
