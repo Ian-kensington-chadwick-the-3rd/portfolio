@@ -1,57 +1,48 @@
 'use client'
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import Link from 'next/link'
 
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
-import ScrollToPlugin from "gsap/ScrollToPlugin";
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+// const handleClick = (n) => {
+//     let scrollTween = null;
+//     scrollTween = gsap.to(window, {
+//         scrollTo: { y: n * innerHeight, autoKill: false },
+//         duration: 1,
+//         onComplete: () => (scrollTween = null),
+//         overwrite: true,
+//     });
+// }
 
-let scrollTween = null;
-const handleClick = (n) => {
-    scrollTween = gsap.to(window, {
-        scrollTo: { y: n * innerHeight, autoKill: false },
-        duration: 1,
-        onComplete: () => (scrollTween = null),
-        overwrite: true,
-    });
-}
+const Nav = ({sectionNumber, onDataChange}) => {
+    const [currentSection, setCurrentSection] = useState(0);
 
-const Nav = () => {
-    const [projectPath, setProjectPath] = useState(false)
-    const pathname = usePathname();
+    useEffect(()=>{
+        setCurrentSection(sectionNumber)
+    },[sectionNumber])
 
-    useEffect(() => {
-        if (pathname.includes('/projects')) {
-            setProjectPath(true);
-        }
-
-        return () => setProjectPath(false)
-    }, [pathname])
+    useEffect(()=>{
+        console.log("this is the current section",currentSection)
+    },)
+    
+    const sendDataToParent = (data) =>{
+        onDataChange(data)
+    }
 
 
     return (
         <div>
-            <Link href='/'>
-                <div className="backbutton" style={projectPath ? undefined : { display: 'none' }}
-                >&#8619;
-                </div>
-            </Link>
-            <div style={projectPath ? { display: 'none' } : undefined}>
-                <span className="block" onClick={() => { handleClick(0) }}>
+            <div>
+                <span className={currentSection === 0 ? "block current-section":"block"} onClick={() => {sendDataToParent(0)}}>
                     <img src='/face.png' />
                     <span className="navhover">
                         Bio
                     </span>
                 </span>
-                <span className="block" onClick={() => { handleClick(1) }}>
+                <span className={currentSection === 1 ? "block current-section":"block"} onClick={() => {sendDataToParent(1)}}>
                     <img src="/work.png" />
                     <span className="navhover">
                         Portfolio
                     </span>
                 </span>
-                <span className="block" onClick={() => { handleClick(2) }}>
+                <span className={currentSection === 2 ? "block current-section":"block"} onClick={() => {sendDataToParent(2)}}>
                     <img src="phone.png" />
                     <span className="navhover">
                         Contact Me

@@ -32,6 +32,7 @@ export async function POST(req, res) {
             })
 
             const res = await transporter.sendMail({
+                subject:'portfolio automated message',
                 from: `porfolio contact from ${email} `,
                 to: 'iansills04@gmail.com',
                 html: `

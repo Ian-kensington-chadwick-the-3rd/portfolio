@@ -1,7 +1,7 @@
 import { Geist, Geist_Mono, Outfit } from "next/font/google";
 import "./globals.css";
 import Header from './header'
-import Nav from './navtabs'
+
 
 
 const outfit = Outfit({
@@ -24,9 +24,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${outfit.variable} ${outfit.variable} antialiased`}
+        className={`${outfit.variable} antialiased`}
       >
-        <Nav/>
+        
         {children}
       </body>
     </html>
