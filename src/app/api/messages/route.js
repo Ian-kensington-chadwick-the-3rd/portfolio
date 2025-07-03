@@ -12,7 +12,8 @@ export async function POST(req, res) {
             return NextResponse.json({ message: 'fill out all fields please' }, { status: 404 })
         }
 
-        const client = new MongoClient('mongodb://localhost:27017')
+        const uri = process.env.URI
+        const client = new MongoClient(uri)
 
         try {
             await client.connect();
