@@ -83,7 +83,6 @@ export default function Home() {
         start: "top bottom",
         // Remove this in production
         onToggle: (self) => {
-          console.log(`onToggle for section ${i}, isActive: ${self.isActive} `)
           if (self.isActive) {
             if (!scrollTween) {
               goToSection(i);
@@ -216,7 +215,6 @@ export default function Home() {
       }
       return response.json();
     }).then(data => {
-      console.log(data)
       if (data) {
         setForm({
           firstName: '',

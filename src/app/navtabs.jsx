@@ -1,15 +1,6 @@
 'use client'
 import { useEffect, useState } from "react";
 
-// const handleClick = (n) => {
-//     let scrollTween = null;
-//     scrollTween = gsap.to(window, {
-//         scrollTo: { y: n * innerHeight, autoKill: false },
-//         duration: 1,
-//         onComplete: () => (scrollTween = null),
-//         overwrite: true,
-//     });
-// }
 
 const Nav = ({sectionNumber, onDataChange}) => {
     const [currentSection, setCurrentSection] = useState(0);
@@ -18,9 +9,6 @@ const Nav = ({sectionNumber, onDataChange}) => {
         setCurrentSection(sectionNumber)
     },[sectionNumber])
 
-    useEffect(()=>{
-        console.log("this is the current section",currentSection)
-    },)
     
     const sendDataToParent = (data) =>{
         onDataChange(data)
