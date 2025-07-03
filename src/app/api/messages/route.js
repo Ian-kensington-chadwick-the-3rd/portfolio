@@ -11,7 +11,7 @@ export async function POST(req, res) {
             // Skip MongoDB for now
             console.log('📧 Sending email only...');
             
-            const transporter = nodemailer.createTransporter({
+            const transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
                     user: process.env.GMAIL_USER,
@@ -21,7 +21,7 @@ export async function POST(req, res) {
     
             await transporter.sendMail({
                 subject: 'Test Email',
-                from: process.env.GMAIL_USER,
+                from: email,
                 to: 'iansills04@gmail.com',
                 html: `<p>Test from ${firstName}: ${message}</p>`
             });
