@@ -298,9 +298,12 @@ label {
 
 .textarea {
   height: 245px;
+  width: 400px;
   max-width: 400px;
-  flex-wrap: wrap;
-  overflow-y: scroll;
+  resize: none; /* Prevents user from resizing */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  
 }
 
 form {
