@@ -3,15 +3,18 @@ import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer'
 
 export async function POST(req, res) {
+    console.log('api route used')
         const body = await req.json();
         const { firstName, email, message } = body
+        console.log(firstName, email, message)
         if (!firstName|| !email|| !message) {
             return NextResponse.json({ message: 'fill out all fields please' }, { status: 404 })
         }
 
         const uri = process.env.URI
+        console.log("this is uri==>",uri)
         const client = new MongoClient(uri)
-
+        console.log('this is client==>', client)
         try {
             await client.connect();
 
@@ -19,8 +22,10 @@ export async function POST(req, res) {
 
             const collection = database.collection('recieved_messages');
 
-            await collection.insertOne({ firstName, email, message, timestamp: new Date(),
+            const result = await collection.insertOne({ firstName, email, message, timestamp: new Date(),
             });
+
+            console.log('this is result===>',result)
 
             const transporter = nodemailer.createTransport({
                 service: 'gmail',
@@ -44,5 +49,7 @@ export async function POST(req, res) {
             return NextResponse.json({ message: 'Data saved successfully!!!' });
         } catch (error) {
             return NextResponse.json({ message: 'SOMETHING WENT WRONG!' })
+        } finally {
+            await client.close();
         }
 };
