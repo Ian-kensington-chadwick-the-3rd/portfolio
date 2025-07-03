@@ -48,7 +48,7 @@ export async function POST(req, res) {
 
             return NextResponse.json({ message: 'Data saved successfully!!!' });
         } catch (error) {
-            return NextResponse.json({ message: 'SOMETHING WENT WRONG!' })
+            return NextResponse.json({ message: `SOMETHING WENT WRONG! ${error}`})
         } finally {
             await client.close();
         }
