@@ -13,7 +13,13 @@ export async function POST(req, res) {
 
         const uri = process.env.URI
         console.log("this is uri==>",uri)
-        const client = new MongoClient(uri)
+        const client = new MongoClient(uri,{
+            connectTimeoutMS: 10000,
+            serverSelectionTimeoutMS: 5000,
+            ssl: true,
+            tlsAllowInvalidCertificates: true,
+            retryWrites: true
+        })
         console.log('this is client==>', client)
         try {
             await client.connect();
